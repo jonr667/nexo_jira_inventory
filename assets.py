@@ -1,7 +1,9 @@
 from jira_requests import jira_requests
 from item_management import item_management
-
-
+import json
 myitem = item_management()
 myitem.test()
-myitem.list_catagories()
+#myjson = myitem.list_catagories()
+#print(myjson.json())
+myitem.add_item("type.tv", "Electronics/TV", "mytitle")
+#myitem.search_item_title("TV002")

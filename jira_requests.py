@@ -14,7 +14,7 @@ class jira_requests:
 
     def post_data(self, operator, json_string):
         request_url = self.asset_tracker_url + operator
-        returned_value = requests.post(request_url, json=json_string, auth=HTTPBasicAuth(self.username, self.password, headers=self.headers))
+        returned_value = requests.post(request_url, json=json_string, headers=self.headers, auth=HTTPBasicAuth(self.username, self.password))
         return returned_value
 
     def get_data(self, operator, params_dict=''):

@@ -5,20 +5,26 @@ class item_management:
     def __init__(self):
         self.my_request = jira_requests()
 
-    def add_item(self):
-        json_dict = {'typeName': 'widget', 'categoryName': 'Widgets', 'fields': [{'typeName': 'system.title', 'values': ['myname2']}]}
-        self.my_request.post_data("item", json_dict)
-
-#r = requests.post('http://localhost:8088/rest/com-spartez-ephor/1.0/item', json={'typeName': 'widget', 'categoryName': 'Widgets', 'fields': [{'typeName': 'system.title', 'values': ['myname2']}]}, auth=HTTPBasicAuth('jringuette', 'mypassword'), headers=headers)
+    def add_item(self, item_type, category, title):
+        json_dict = {'typeName': item_type,
+                     'categoryName': category,
+                     'fields': [
+                                {'typeName': 'system.title', 'values': [title]}
+                                ]
+                    }
+        inserted_item = self.my_request.post_data("item", json_dict)
+        return inserted_item
 
     def list_catagories(self):
-        params_dict={'recursive': 'True'}
-        returned_values = self.my_request.get_data("category", params_dict)
-        # print(returned_values.json())
-        return returned_values
+        params_dict = {'recursive': 'True'}
+        catagories = self.my_request.get_data("category", params_dict)
+        return catagories
 
-    def find_item(self):
-        pass
+    def search_item_title(self, title):
+        title_query = 'system.title=' + title
+        params_dict = {'query': title_query}
+        item = self.my_request.get_data("search", params_dict)
+        return item
 
     def create_item_type(self):
         pass
