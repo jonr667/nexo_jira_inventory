@@ -20,6 +20,12 @@ class item_management:
         catagories = self.my_request.get_data("category", params_dict)
         return catagories
 
+    def search_items(self, field, search_text):
+        item_query = field + '=' + search_text
+        params_dict = {'query': item_query}
+        items = self.my_request.get_data("search", params_dict)
+        return items
+
     def search_item_title(self, title):
         title_query = 'system.title=' + title
         params_dict = {'query': title_query}
@@ -39,6 +45,9 @@ class item_management:
         pass
 
     def link_issue_to_item(self):
+        pass
+
+    def part_id_from_dict(self):
         pass
 
     def test(self):
